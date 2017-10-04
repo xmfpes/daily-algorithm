@@ -4,13 +4,11 @@ public class Recursion_day06 {
 	public static int cols[] = new int[N + 1];
 	public static void main(String[] args) {
 		queens(0);
-		System.out.println("hi");
 	}
 	public static boolean queens(int level) {
 		if(!promising(level)) {
 			return false;
 		}else if(level==N) {
-			System.out.println("d");
 			for(int i=1; i<=N; i++) {
 				System.out.println("(" + i + "," + cols[i] + ")");
 			}
@@ -18,7 +16,6 @@ public class Recursion_day06 {
 		}else {
 			for(int i=1; i<=N; i++) {
 				cols[level + 1] = i;
-				System.out.println(i + ":" + cols[level + 1]);
 				if(queens(level + 1)) {
 					return true;
 				}
