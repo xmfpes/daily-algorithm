@@ -11,9 +11,7 @@ public class Sort_day11 {
 		int length = arr.length - 1;
 		maxHeapBuild(arr);
 		for (int i = length; i >= 1; i--) {
-			int temp = arr[0];
-			arr[0] = arr[i];
-			arr[i] = temp;
+			swap(arr, 0, i);
 			length-=1;
 			maxHeapify(arr, 0);
 		}
@@ -28,22 +26,29 @@ public class Sort_day11 {
 	}
 
 	private static void maxHeapify(int[] arr, int i) {
-		if (arr.length < i * 2 + 1) {
+		int length = arr.length;
+		int leftChild = i*2;
+		int rightChild = (i*2)+1;
+		int k = 0;
+		
+		//자식 노드가 없을 경우에는 종료한다.
+		if(leftChild > length || rightChild > length) {
 			return;
 		}
-		int k = 0;
-		if (arr[i * 2] > arr[i * 2 + 1]) {
-			k = i * 2;
+		//더 큰 Child를 k에 할당한다.
+		if (arr[leftChild] > arr[rightChild]) {
+			k = leftChild;
 		} else {
-			k = i * 2 + 1;
+			k = rightChild;
 		}
+		
+		//부모 노드가 자식보다 큰 경우 종
 		if (arr[i] >= arr[k]) {
 			return;
 		}
-		int temp = 0;
-		temp = arr[i];
-		arr[i] = arr[k];
-		arr[k] = temp;
+		
+		//swap
+		swap(arr, i, k);
 		maxHeapify(arr, k);
 	}
 
@@ -52,5 +57,11 @@ public class Sort_day11 {
 			System.out.print(arr[i] + " ");
 		}
 		System.out.println();
+	}
+	
+	public static void swap(int arr[], int i, int j) {
+		int temp = arr[i];
+		arr[i] = arr[j];
+		arr[j] = temp;
 	}
 }
